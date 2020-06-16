@@ -28,7 +28,9 @@ namespace CoreMVC
             services.AddControllersWithViews();
 
             services.AddDbContext<CoreMVCContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("CoreMVCContext")));
+                    options.UseNpgsql(Configuration.GetConnectionString("CoreMVCContext"), builder =>
+                    builder.MigrationsAssembly("CoreMVC")
+                    ));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
