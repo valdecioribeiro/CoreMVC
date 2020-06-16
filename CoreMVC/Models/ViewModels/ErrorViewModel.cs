@@ -1,6 +1,6 @@
 using System;
 
-namespace CoreMVC.Models
+namespace CoreMVC.Models.ViewModels
 {
     public class ErrorViewModel
     {
