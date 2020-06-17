@@ -15,5 +15,9 @@ namespace CoreMVC.Data
         }
 
         public DbSet<CoreMVC.Models.Departamento> Departamento { get; set; }
+
+        public DbSet<Vendedor> Vendedor { get; set; }
+
+        public DbSet<RegistroVenda> RegistroVenda { get; set; }
     }
 }

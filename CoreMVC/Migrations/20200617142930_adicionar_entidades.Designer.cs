@@ -3,15 +3,17 @@ using System;
 using CoreMVC.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace CoreMVC.Migrations
 {
     [DbContext(typeof(CoreMVCContext))]
-    partial class CoreMVCContextModelSnapshot : ModelSnapshot
+    [Migration("20200617142930_adicionar_entidades")]
+    partial class adicionar_entidades
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
