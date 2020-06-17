@@ -31,14 +31,17 @@ namespace CoreMVC
                     options.UseNpgsql(Configuration.GetConnectionString("CoreMVCContext"), builder =>
                     builder.MigrationsAssembly("CoreMVC")
                     ));
+
+            services.AddScoped<ServicoPovoamentoBanco>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ServicoPovoamentoBanco povoamento)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                povoamento.Povoa();
             }
             else
             {
