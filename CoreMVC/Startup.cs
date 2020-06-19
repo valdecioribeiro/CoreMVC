@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using CoreMVC.Data;
+using CoreMVC.Services;
 
 namespace CoreMVC
 {
@@ -33,6 +34,8 @@ namespace CoreMVC
                     ));
 
             services.AddScoped<ServicoPovoamentoBanco>();
+
+            services.AddScoped<VendedorService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
