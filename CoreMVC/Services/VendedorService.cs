@@ -21,5 +21,11 @@ namespace CoreMVC.Services
         {
             return _contexto.Vendedor.ToList();
         }
+
+        public void Inserir(Vendedor vendedor)
+        {
+            _contexto.Add(vendedor);
+            _contexto.SaveChanges();
+        }
     }
 }

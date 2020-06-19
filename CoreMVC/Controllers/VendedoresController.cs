@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CoreMVC.Models;
 using CoreMVC.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -22,6 +23,19 @@ namespace CoreMVC.Controllers
         {
             var lista = _vendedoresService.RecuperarTodos();
             return View(lista);
+        }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(Vendedor vendedor)
+        {
+            _vendedoresService.Inserir(vendedor);
+            return RedirectToAction(nameof(Index));
         }
     }
 }
