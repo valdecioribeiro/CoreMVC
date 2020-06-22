@@ -66,5 +66,20 @@ namespace CoreMVC.Controllers
             _vendedoresService.RemoverVendedor(id);
             return RedirectToAction(nameof(Index));
         }
+
+        public IActionResult Detail(int? id) 
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var obj = _vendedoresService.BuscarPorID(id.Value);
+            if (obj == null)
+            {
+                return NotFound();
+            }
+            return View(obj);
+        }
     }
 }

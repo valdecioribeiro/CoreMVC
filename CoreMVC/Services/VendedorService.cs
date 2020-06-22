@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using CoreMVC.Data;
 using CoreMVC.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace CoreMVC.Services
 {
@@ -30,7 +31,7 @@ namespace CoreMVC.Services
 
         public Vendedor BuscarPorID(int id)
         {
-            return _contexto.Vendedor.FirstOrDefault(x=>x.Id == id);
+            return _contexto.Vendedor.Include(obj => obj.Departamento).FirstOrDefault(x=>x.Id == id);
         }
 
         public void RemoverVendedor(int id)
