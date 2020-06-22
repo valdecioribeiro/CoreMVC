@@ -24,6 +24,7 @@ namespace CoreMVC.Services
 
         public void Inserir(Vendedor vendedor)
         {
+            vendedor.Departamento = _contexto.Departamento.First();
             _contexto.Add(vendedor);
             _contexto.SaveChanges();
         }
