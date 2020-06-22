@@ -1,0 +1,55 @@
+﻿@model CoreMVC.Models.Vendedor;
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Deletar";
+}
+
+
+<h2>@ViewData["Title"]</h2>
+
+<h3>Tem certeza que deseja deletar?</h3>
+
+<div>
+    <h4>Vendedor</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+        <dt>
+            @Html.DisplayFor(model => model.Nome)
+        </dt>
+    </dl>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dt>
+            @Html.DisplayFor(model => model.Email)
+        </dt>
+    </dl>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nascimento)
+        </dt>
+        <dt>
+            @Html.DisplayFor(model => model.Nascimento)
+        </dt>
+    </dl>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SalarioBase)
+        </dt>
+        <dt>
+            @Html.DisplayFor(model => model.SalarioBase)
+        </dt>
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="hidden" asap-for="Id" />
+        <input type="submit" value="Delete" class="btn btn-danger" />
+        <a asp-action="Index">Cancelar e voltar</a>
+    </form>
+</div>

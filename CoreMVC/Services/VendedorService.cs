@@ -24,8 +24,19 @@ namespace CoreMVC.Services
 
         public void Inserir(Vendedor vendedor)
         {
-            vendedor.Departamento = _contexto.Departamento.First();
             _contexto.Add(vendedor);
+            _contexto.SaveChanges();
+        }
+
+        public Vendedor BuscarPorID(int id)
+        {
+            return _contexto.Vendedor.FirstOrDefault(x=>x.Id == id);
+        }
+
+        public void RemoverVendedor(int id)
+        {
+            var obj = _contexto.Vendedor.Find(id);
+            _contexto.Vendedor.Remove(obj);
             _contexto.SaveChanges();
         }
     }

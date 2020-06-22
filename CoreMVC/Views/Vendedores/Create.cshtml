@@ -1,7 +1,7 @@
 ﻿@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
-@model CoreMVC.Models.Vendedor
+@model CoreMVC.Models.ViewModels.VendedorFormViewModel
 @{
     ViewData["Title"] = "Create";
 }
@@ -14,20 +14,24 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div class="form-group">
-                <label asp-for="Nome" class="custom-control-label"></label>
-                <input asp-for="Nome" class="form-control" />
+                <label asp-for="vendedor.Nome" class="custom-control-label"></label>
+                <input asp-for="vendedor.Nome" class="form-control" />
             </div>
             <div class="form-group">
-                <label asp-for="Email" class="custom-control-label"></label>
-                <input asp-for="Email" class="form-control" />
+                <label asp-for="vendedor.Email" class="custom-control-label"></label>
+                <input asp-for="vendedor.Email" class="form-control" />
             </div>
             <div class="form-group">
-                <label asp-for="Nascimento" class="custom-control-label"></label>
-                <input asp-for="Nascimento" class="form-control" />
+                <label asp-for="vendedor.Nascimento" class="custom-control-label"></label>
+                <input asp-for="vendedor.Nascimento" class="form-control" />
             </div>
             <div class="form-group">
-                <label asp-for="SalarioBase" class="custom-control-label"></label>
-                <input asp-for="SalarioBase" class="form-control" />
+                <label asp-for="vendedor.SalarioBase" class="custom-control-label"></label>
+                <input asp-for="vendedor.SalarioBase" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="vendedor.DepartamentoId" class="control-label"></label>
+                <select asp-for="vendedor.DepartamentoId" asp-items="@(new SelectList(Model.Departamentos,"Id", "Name"))" class="form-control"></select>
             </div>
             <div class="form-group">
                 <input type="submit" value="Criar" class="btn btn-dark" />
