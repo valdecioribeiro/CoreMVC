@@ -16,7 +16,7 @@ namespace CoreMVC.Services
             _contexto = contexto;
         }
 
-        public IList<Departamento> RecuperarTodos()
+        public List<Departamento> RecuperarTodos()
         {
             return _contexto.Departamento.OrderBy(x => x.Name).ToList();
         }

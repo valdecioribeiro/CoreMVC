@@ -7,7 +7,7 @@ namespace CoreMVC.Models.ViewModels
 {
     public class VendedorFormViewModel
     {
-        public Vendedor vendedor { get; set; }
+        public Vendedor Vendedor { get; set; }
         public ICollection<Departamento> Departamentos { get; set; }
     }
 }

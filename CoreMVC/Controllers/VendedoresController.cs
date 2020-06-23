@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using CoreMVC.Models;
 using CoreMVC.Models.ViewModels;
 using CoreMVC.Services;
+using CoreMVC.Services.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoreMVC.Controllers
@@ -80,6 +81,52 @@ namespace CoreMVC.Controllers
                 return NotFound();
             }
             return View(obj);
+        }
+
+        public IActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var obj = _vendedoresService.BuscarPorID(id.Value);
+            if(obj == null)
+            {
+                return NotFound();
+            }
+
+            List<Departamento> departamentos = _departamento_service.RecuperarTodos();
+            VendedorFormViewModel viewModel = new VendedorFormViewModel { Vendedor = obj, Departamentos = departamentos };
+
+            return View(viewModel);
+
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(int id, Vendedor vendedor)
+        {
+            if (id != vendedor.Id)
+            {
+                return BadRequest();
+            }
+
+            try 
+            { 
+            _vendedoresService.Update(vendedor);
+
+            return RedirectToAction(nameof(Index));
+
+            }
+            catch (NotFoundException)
+            {
+                return NotFound();
+            }
+            catch (DbConcurrencyException)
+            {
+                return BadRequest();
+            }
         }
     }
 }
