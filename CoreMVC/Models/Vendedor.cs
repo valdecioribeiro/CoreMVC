@@ -41,5 +41,7 @@ namespace CoreMVC.Models
         {
             return Vendas.Where(venda => venda.Data >= inicial && venda.Data <= final).Sum(venda => venda.Quantidade);
         }
+
+
     }
 }

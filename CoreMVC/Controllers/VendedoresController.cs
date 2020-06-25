@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using CoreMVC.Models;
 using CoreMVC.Models.ViewModels;
 using CoreMVC.Services;
 using CoreMVC.Services.Exceptions;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoreMVC.Controllers
@@ -49,13 +51,13 @@ namespace CoreMVC.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id não foi fornecido!" });
             }
 
             var obj = _vendedoresService.BuscarPorID(id.Value);
             if (obj == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id não encontrado!" });
             }
             return View(obj);
         }
@@ -72,13 +74,13 @@ namespace CoreMVC.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id não foi fornecido!" });
             }
 
             var obj = _vendedoresService.BuscarPorID(id.Value);
             if (obj == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id não encontrado!" });
             }
             return View(obj);
         }
@@ -87,13 +89,13 @@ namespace CoreMVC.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id não foi fornecido!" });
             }
 
             var obj = _vendedoresService.BuscarPorID(id.Value);
             if(obj == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id não encontrado!" });
             }
 
             List<Departamento> departamentos = _departamento_service.RecuperarTodos();
@@ -109,7 +111,7 @@ namespace CoreMVC.Controllers
         {
             if (id != vendedor.Id)
             {
-                return BadRequest();
+                return RedirectToAction(nameof(Error), new { message = "Id não corresponde!" });
             }
 
             try 
@@ -118,15 +120,25 @@ namespace CoreMVC.Controllers
 
             return RedirectToAction(nameof(Index));
 
-            }
-            catch (NotFoundException)
+            } //pode ser substituído por um application exception. Ele é um super tipo das exceções colocadas abaixo!
+            catch (NotFoundException e)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = e.Message });
             }
-            catch (DbConcurrencyException)
+            catch (DbConcurrencyException e)
             {
-                return BadRequest();
+                return RedirectToAction(nameof(Error), new { message = e.Message });
             }
+        }
+
+        public IActionResult Error(string message)
+        {
+            var viewModel = new ErrorViewModel
+            {
+                Message = message,
+                RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
+            };
+            return View(viewModel);
         }
     }
 }
