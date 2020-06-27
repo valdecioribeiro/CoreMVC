@@ -9,15 +9,23 @@ namespace CoreMVC.Models
     public class Vendedor
     {
         public int Id { get; set; }
+
+        [Required(ErrorMessage = "{0} é obrigatório")]
+        [StringLength(60, MinimumLength = 3, ErrorMessage = "{0} deve ter entre {2} e {1}")]
         public string Nome { get; set; }
 
         [DataType(DataType.EmailAddress)]
+        [Required(ErrorMessage = "{0} é obrigatório")]
+        [EmailAddress(ErrorMessage = "Coloque um e-mail válido!")]
         public string Email { get; set; }
 
         [Display(Name = "Salário Base")]
         [DisplayFormat(DataFormatString = "{0:F2}")]
+        [Required(ErrorMessage = "{0} é obrigatório")]
+        [Range(100.0, 50000.0, ErrorMessage ="{0} deve ser no mínimo {1} e no máximo {2}!")]
         public double SalarioBase { get; set; }
 
+        [Required(ErrorMessage = "{0} é obrigatório")]
         [Display(Name = "Data de Nascimento")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
