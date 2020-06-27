@@ -62,9 +62,18 @@ namespace CoreMVC.Services
 
         public async Task RemoverVendedorAsync(int id)
         {
-            var obj = await _contexto.Vendedor.FindAsync(id);
-            _contexto.Vendedor.Remove(obj);
-            await _contexto.SaveChangesAsync();
+            try
+            {
+                var obj = await _contexto.Vendedor.FindAsync(id);
+                _contexto.Vendedor.Remove(obj);
+                await _contexto.SaveChangesAsync();
+
+            } 
+            catch (DbUpdateException e)
+            {
+                throw new IntegrityException(e.Message);
+            }
+            
         }
 
         public void Update(Vendedor vendedor)
